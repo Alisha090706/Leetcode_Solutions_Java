@@ -4,11 +4,12 @@ class Solution {
         Arrays.sort(happiness);
         long kids=0;
         long sum=0;
-        for(int i=n-1;i>=0;i--){
-            sum+=happiness[i]-kids<0?0:happiness[i]-kids;
+        for(int i=n-1;k-->0;i--){
+            long curr=happiness[i]-kids;
+            if(curr<0) break;
+            sum+=curr;
             kids++;
-            k--;
-            if(k==0)break;
+
         }
         return sum;
     }
