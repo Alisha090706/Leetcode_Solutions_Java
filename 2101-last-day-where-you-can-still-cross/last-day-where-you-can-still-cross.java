@@ -15,7 +15,7 @@ class Solution {
             boolean poss=false;
             boolean[][] visited=new boolean[row][col];
             for(int i=0;i<col;i++){
-                if(grid[0][i]==0 && dfs(grid,0,i,poss,visited)){
+                if(grid[0][i]==0 && dfs(grid,0,i,visited)){
                     poss=true;
                     break;
                 }
@@ -32,7 +32,7 @@ class Solution {
         }
         return answer;
     }
-    public boolean dfs(int[][] grid,int row,int col,boolean poss,boolean[][] visited){
+    public boolean dfs(int[][] grid,int row,int col,boolean[][] visited){
         if(row<0 || col<0 || row>=grid.length || col>=grid[0].length || grid[row][col]==1 || visited[row][col]) return false;
 
         if(row==grid.length-1){
@@ -40,9 +40,9 @@ class Solution {
         }
         visited[row][col]=true;
 
-        return (dfs(grid,row+1,col,poss,visited) ||
-        dfs(grid,row-1,col,poss,visited)||
-        dfs(grid,row,col+1,poss,visited)||
-        dfs(grid,row,col-1,poss,visited));
+        return (dfs(grid,row+1,col,visited) ||
+        dfs(grid,row-1,col,visited)||
+        dfs(grid,row,col+1,visited)||
+        dfs(grid,row,col-1,visited));
     }
 }
