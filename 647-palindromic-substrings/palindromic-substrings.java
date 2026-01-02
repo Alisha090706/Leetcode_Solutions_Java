@@ -16,10 +16,10 @@ class Solution {
     }
     public boolean checkpalindrome(String s,int i,int j){
         if(i>j) return true;
+        if(dp[i][j]!=null) return dp[i][j];
         if(s.charAt(i)==s.charAt(j)){
             return dp[i][j]=checkpalindrome(s,i+1,j-1);
         }
-        if(dp[i][j]!=null) return dp[i][j];
         return dp[i][j]=false;
     }
 }
