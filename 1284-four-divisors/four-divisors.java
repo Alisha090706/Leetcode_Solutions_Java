@@ -18,6 +18,7 @@ class Solution {
                             sum += i + other;
                         }
                     }
+                    if(divisor > 4) break;
 
                 }
             }
