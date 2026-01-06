@@ -39,6 +39,49 @@ class Solution {
         // for(long[] row: dp) Arrays.fill(row, -1);
         // return solve(nums,0,-1);
     }
+
+    // Example : [4, 8, 5, 8]
+    // map = {}
+    // ans = -inf
+    // i = 0{
+    //     nums[i] - i = 4 - 0;
+    //     prev = null;
+    //     currsum = 4;
+    //     map = {4 -> 4}
+    //     higher = null;
+    //     ans = 4;
+    // }
+    // i = 1{
+    //     nums[i] - i = 8 - 1 = 7;
+    //     prev = 4
+    //     currsum = 12
+    //     map = {4 -> 4, 7 -> 12}
+    //     higher = null;
+    //     ans = 12;
+    // }
+    // i = 2{
+    //     nums[i] - i = 5 - 2 = 3
+    //     prev = null
+    //     currsum = 5;
+    //     map = {3 -> 5, 4 -> 4, 7 -> 12}
+    //     higher = 4
+    //     remove 4
+    //     map = {3 -> 5, 7 -> 12}
+    //     ans = 12
+    // }
+    // i = 3{
+    //     nums[i] - i = 8 - 3 = 5
+    //     prev = 3
+    //     currsum = 5 + 8 = 13
+    //     map = {3 -> 5, 5 -> 13, 7 -> 12}
+    //     higher = 7 
+    //     remove 7
+    //     map = {3 -> 5, 5 -> 13}
+    //     ans = 13;
+    // }
+    // Final Answer = 13
+
+    // DP - Memoiation ( gives TLE )
     // public long solve(int[] nums,int i,int prev){
     //     if(i == n){
     //         return 0;
