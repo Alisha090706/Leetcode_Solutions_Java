@@ -20,8 +20,8 @@ class Solution {
         if(dp[i][j] != -1) return dp[i][j];
         int down =  solve(grid, i+1, j);
         int right = solve(grid, i, j+1);
-        int curr = grid[i][j] <= 0? Math.abs(grid[i][j]) : -grid[i][j];
-        int result = curr + Math.min(down, right);
+        int curr = grid[i][j];
+        int result = Math.min(down, right) - curr;
         return dp[i][j] = (result)<=0? 1 : result;
     }
     
