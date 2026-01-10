@@ -25,10 +25,7 @@ class Solution {
             l2 = l2!=null?l2.next:null;
 
         }
-        if(carry != 0){
-            ListNode curr = new ListNode(carry);
-            temp.next= curr;
-        }
+        
         return dummy.next;
         
     }
