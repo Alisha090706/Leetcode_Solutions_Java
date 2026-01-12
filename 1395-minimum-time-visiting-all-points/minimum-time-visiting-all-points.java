@@ -5,8 +5,7 @@ class Solution {
         for(int i = 1; i < n; i++){
             int x = Math.abs(points[i][0] - points[i-1][0]);
             int y = Math.abs(points[i][1] - points[i-1][1]);
-            int diagonal = Math.min(x,y);
-            time += x + y - diagonal;
+            time += Math.max(x, y);
         }
         return time;
     }
