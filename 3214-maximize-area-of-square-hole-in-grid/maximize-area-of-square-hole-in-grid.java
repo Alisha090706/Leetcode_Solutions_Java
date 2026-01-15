@@ -4,26 +4,26 @@ class Solution {
         Arrays.sort(hBars);
         Arrays.sort(vBars);
 
-        int maxh = 1;
-        int maxv = 1;
-        int curr = 1;
+        int maxh = 0;
+        int maxv = 0;
+        int curr = 0;
         for(int j = 1; j <hBars.length; j++){
             if(hBars[j] == hBars[j-1] + 1){
                 curr++;
             }
-            else curr = 1;
+            else curr = 0;
             maxh = Math.max(maxh, curr);
         }
-        curr = 1;
+        curr = 0;
         for(int j = 1; j <vBars.length; j++){
             if(vBars[j] == vBars[j-1] + 1){
                 curr++;
             }
-            else curr = 1;
+            else curr = 0;
             maxv = Math.max(maxv, curr);
         }
 
-        int side = Math.min(maxh,maxv) + 1;
+        int side = Math.min(maxh,maxv) + 2;
         return side * side;
     }
 }
