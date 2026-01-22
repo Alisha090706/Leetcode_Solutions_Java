@@ -14,9 +14,8 @@ class Solution {
             while((j - i + 1) - maxScore > k){
                 int idx2 = s.charAt(i) - 'A';
                 freq[idx2] --;
-                for(int f : freq){
-                    maxScore = Math.max(maxScore, f);
-                }
+                maxScore = Math.max(maxScore, freq[idx]);
+
                 i++;
             }
             maxLength = Math.max(maxLength, j - i + 1);
