@@ -1,36 +1,35 @@
 class Solution {
     public boolean canFinish(int numCourses, int[][] prerequisites) {
         ArrayList<ArrayList<Integer>> adj = new ArrayList<>();
+        int[] indegree = new int[numCourses];
         for(int i = 0; i < numCourses; i++){
             adj.add(new ArrayList<>());
         }
-        for(int[] preq : prerequisites){
+        for(int[] preq: prerequisites){
             int u = preq[0];
             int v = preq[1];
             adj.get(v).add(u);
+            indegree[u]++;
         }
-        boolean[] visited = new boolean[numCourses];
-        boolean[] inRecur = new boolean[numCourses];
-        for(int i = 0; i < numCourses; i++){
-            if(!visited[i] && dfs(adj,i,visited,inRecur)){
-                return false;
-            }
-        }
-        return true;
+        //Kahn's Algorithm of TopoSort
+        //If we are able to find there is a cycle then we can return false else true;
+        return toposort(adj,numCourses,indegree);
     }
-    public boolean dfs(ArrayList<ArrayList<Integer>> adj, int u, boolean[] visited, boolean[] inRecur){
-        visited[u] =true;
-        inRecur[u] = true;
-        for(int v: adj.get(u)){
-            
-            if(!visited[v]){
-                if(dfs(adj, v, visited, inRecur)) return true;
-            }
-            else if(inRecur[v]){
-                return true;
+    public boolean toposort(ArrayList<ArrayList<Integer>> adj,int n,int[] indegree){
+        Queue<Integer> q = new LinkedList<>();
+        
+        for(int i = 0; i <n ;i++){
+            if(indegree[i] == 0) q.add(i);
+        }
+        int count = 0;
+        while(!q.isEmpty()){
+            int curr = q.poll();
+            count++;
+            for(int v: adj.get(curr)){
+                indegree[v]--;
+                if(indegree[v] == 0) q.add(v);
             }
         }
-        inRecur[u] = false;
-        return false;
+        return count == n;
     }
 }
