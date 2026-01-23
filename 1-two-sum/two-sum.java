@@ -1,22 +1,15 @@
 class Solution {
     public int[] twoSum(int[] nums, int target) {
         int n = nums.length;
-
-        //Brute Force - Iterating over nums for each value to find the sum that is equal to target
-        // TC = O(N^2)
-
-        //Optimized Technique - Using HashMap
         HashMap<Integer, Integer> map = new HashMap<>();
-        //map -> (number,index);
-        map.put(nums[0], 0);
-        for (int i = 1; i < n; i++) {
-            int otherNum = target - nums[i];
-            if (map.containsKey(otherNum)) {
-                return new int[] { map.get(otherNum), i };
+        for(int i = 0; i < n; i++){
+            int num1 = nums[i];
+            int num2 = target - num1;
+            if(map.containsKey(num2)){
+                return new int[]{i, map.get(num2)};
             }
-            map.put(nums[i], i);
+            map.put(num1, i);
         }
-        return new int[] {};
-
+        return new int[]{-1, -1};
     }
 }
