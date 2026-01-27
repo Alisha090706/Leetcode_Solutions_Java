@@ -21,6 +21,7 @@ class Solution {
             int[] curr = q.poll();
             int u = curr[0];
             int dist = curr[1];
+            if(u == n-1) return dist;
             for(int[] neigh : adj.get(u)){
                 int v = neigh[0];
                 int d = neigh[1];
@@ -31,7 +32,7 @@ class Solution {
                 }
             }
         }
-        return cost[n-1] == Integer.MAX_VALUE? -1 : cost[n-1];
+        return -1;
     }
 
 }
