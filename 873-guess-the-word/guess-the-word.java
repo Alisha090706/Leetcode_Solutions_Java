@@ -10,6 +10,7 @@ class Solution {
         for (int i = 0; i < 10; ++i) {
             String guess = words[new Random().nextInt(words.length)];
             int x = master.guess(guess);
+            if(x == 6) break;
             List<String> words2 = new ArrayList<>();
             for (String w : words)
                 if (match(guess, w) == x)
