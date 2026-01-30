@@ -1,1 +1,1 @@
-<h2>compare-strings-by-frequency-of-the-smallest-character Notes</h2><hr>[ Time taken: 5 m 5 s ]
+<h2>compare-strings-by-frequency-of-the-smallest-character Notes</h2><hr>[ Time taken: 7 m 9 s ]
