@@ -2,13 +2,19 @@ class Solution {
     public int[] numSmallerByFrequency(String[] queries, String[] words) {
         int n = queries.length;
         int[] result = new int[n];
+        int[] f1 = new int[n];
+        int[] f2 = new int[words.length];
         for(int i = 0; i < n; i++){
-            String q = queries[i];
-            int freqQuery = f(q);
+            f1[i] = f(queries[i]);
+        }
+        for(int i = 0; i < words.length; i++){
+            f2[i] = f(words[i]);
+        }
+        for(int i = 0; i < n; i++){
+            int freqQuery = f1[i];
             int count = 0;
-            for(String w: words){
-                int freqWord = f(w);
-                if(freqQuery < freqWord) count++;
+            for(int freqWord : f2){
+                if(freqWord > freqQuery) count++;
             }
             result[i] = count;
         }
