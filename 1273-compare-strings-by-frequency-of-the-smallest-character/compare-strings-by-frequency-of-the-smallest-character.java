@@ -17,11 +17,14 @@ class Solution {
     }
     public int f(String s){
         char[] letters = s.toCharArray();
-        Arrays.sort(letters);
+        char smallest = letters[0];
         int count = 0;
         for(char c : letters){
-            if(c == letters[0]) count++;
-            else break;
+            if(c < smallest){
+                smallest = c;
+                count = 1;
+            }
+            else if(c == smallest) count++;
         }
         return count;
     }
