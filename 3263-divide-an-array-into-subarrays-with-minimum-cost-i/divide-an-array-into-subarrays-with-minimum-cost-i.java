@@ -1,11 +1,17 @@
 class Solution {
     public int minimumCost(int[] nums) {
         int n = nums.length;
-        List<Integer> list = new ArrayList<>();
+        int min = Integer.MAX_VALUE;
+        int secondmin = Integer.MAX_VALUE;
         for(int i = 1; i < n; i++){
-            list.add(nums[i]);
+            if(nums[i] <= min){
+                secondmin = min;
+                min = nums[i];
+            }
+            else if(nums[i] > min && nums[i] < secondmin){
+                secondmin = nums[i];
+            }
         }
-        Collections.sort(list);
-        return nums[0] + list.get(0) + list.get(1);
+        return nums[0] + min + secondmin;
     }
 }
