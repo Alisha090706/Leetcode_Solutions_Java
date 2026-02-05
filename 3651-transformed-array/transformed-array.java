@@ -6,30 +6,15 @@ class Solution {
             if(nums[i] == 0){
                 result[i] = nums[i];
             }
-            else if(nums[i] > 0){
-                result[i] = right(nums,i,nums[i]);
-            }
             else{
-                result[i] = left(nums,i,Math.abs(nums[i]));
+                int newidx = (i + nums[i])%n;
+                if(newidx < 0){
+                    newidx += n;
+                }
+                result[i] = nums[newidx];
             }
         }
         return result;
     }
-    public int right(int[] nums,int start,int end){
-        int n = nums.length;
-        while(end-- > 0){
-            start = (start + 1) % n;
-        }
-        return nums[start];
-    }
-    public int left(int[] nums,int start,int end){
-        int n = nums.length;
-        while(end-- > 0){
-            start = (start - 1) % n;
-            if(start < 0){
-                start = n-1;
-            }
-        }
-        return nums[start];
-    }
+    
 }
