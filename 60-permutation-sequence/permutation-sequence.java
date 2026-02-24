@@ -1,12 +1,15 @@
 class Solution {
     ArrayList<String> permutations = new ArrayList<>();
     boolean[] visited;
+    int K;
     public String getPermutation(int n, int k) {
+        K = k;
         visited = new boolean[n+1];
         solve(n, new StringBuilder());
         return permutations.get(k - 1);
     }
     public void solve(int n, StringBuilder sb){
+        if(permutations.size() >= K) return;
         if(sb.length() == n){
             permutations.add(sb.toString());
             return;
