@@ -7,26 +7,23 @@ class Solution {
         boolean dot = false;
         for(int i = 0; i < n; i++){
             char c = s.charAt(i);
-            if(Character.isDigit(c)){
-                num = true;
+            if((c >= 'a' && c <= 'z' && c != 'e') || (c >= 'A' && c <='Z' && c != 'E')) return false;
+            if(i == n - 1 && ("-+eE".indexOf(c) != -1)) return false;
+            if(c == 'e' || c == 'E'){
+                if(exp || !num) return false;
+                exp = true;
+                num = false;
             }
             else if(c == '+' || c == '-'){
-                // sign allowed only at start or right after e/E
                 if(i > 0 && s.charAt(i - 1) != 'e' && s.charAt(i - 1) != 'E') return false;
             }
             else if(c == '.'){
-                // dot not allowed after exponent
-                if(dot || exp) return false;
+                if(exp || dot) return false;
                 dot = true;
             }
-            else if(c == 'e' || c == 'E'){
-                // exponent must appear once
-                // and must have digit before it
-                if(exp || !num) return false;
-                num = false; // must have digit after it
-                exp = true;
+            else{
+                num = true;
             }
-            else return false;
         }
         return num;
         
