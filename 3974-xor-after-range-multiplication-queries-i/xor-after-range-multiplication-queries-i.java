@@ -9,8 +9,8 @@ class Solution {
             int v = query[3];
             int k = query[2];
             while(idx <= r) {
-                long prod = (long)nums[idx] * v;
-                nums[idx] = (int)(prod % MOD);
+                long prod = nums[idx] * v;
+                nums[idx] = (int)(((long)nums[idx] * v) % MOD);
                 idx += k;
             }
         }
