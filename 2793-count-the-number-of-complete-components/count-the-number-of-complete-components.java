@@ -6,20 +6,6 @@ class Solution {
 
         //so to find connected components -> union and find
         // for every sub graph -> calculate total number of edges (nC2)
-
-        ArrayList<ArrayList<Integer>> adj = new ArrayList<>();
-        for(int i = 0; i < n; i++) {
-            adj.add(new ArrayList<>());
-        }
-
-        for(int[] edge : edges) {
-            int u = edge[0];
-            int v = edge[1];
-
-            adj.get(u).add(v);
-            adj.get(v).add(u);
-        }
-
         //step 1 : make all components
         int[] parent = new int[n];
         int[] rank = new int[n];
@@ -38,20 +24,26 @@ class Solution {
         }
 
         //step 2: count total edges
-        HashSet<Integer> set = new HashSet<>();
-        
-        for(int i = 0; i < n; i++) {
-            int root = find(parent, i);
-            if(set.contains(root)) continue;
-            int vertices = verticesInOneComp[root];
-            int totalEdges = (vertices * (vertices - 1)) / 2;
-            int edgesInComp = countEdges(adj, i, n);
+        HashMap<Integer,Integer> edgeCount = new HashMap<>();
 
-            if(totalEdges == edgesInComp) answer ++;
-
-            set.add(root);
+        for(int[] edge : edges){
+            int root = find(parent, edge[0]);
+            edgeCount.put(root,
+                edgeCount.getOrDefault(root,0)+1);
         }
+        HashSet<Integer> seen = new HashSet<>();
 
+        for(int i = 0; i < n; i++){
+            int root = find(parent, i);
+            if(seen.contains(root))
+                continue;
+            seen.add(root);
+            int vertices = verticesInOneComp[root];
+            int expectedEdges = vertices * (vertices - 1) / 2;
+            int actualEdges = edgeCount.getOrDefault(root, 0);
+            if(expectedEdges == actualEdges)
+                answer++;
+        }
         return answer;
     }
 
