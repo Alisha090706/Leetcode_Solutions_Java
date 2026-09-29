@@ -1,35 +1,46 @@
 class Solution {
     public boolean canFinish(int numCourses, int[][] prerequisites) {
+        int n = numCourses;
         ArrayList<ArrayList<Integer>> adj = new ArrayList<>();
-        int[] indegree = new int[numCourses];
-        for(int i = 0; i < numCourses; i++){
+        for(int i = 0; i < n; i++) {
             adj.add(new ArrayList<>());
         }
-        for(int[] preq: prerequisites){
-            int u = preq[0];
-            int v = preq[1];
-            adj.get(v).add(u);
-            indegree[u]++;
+        for(int[] p : prerequisites) {
+            adj.get(p[1]).add(p[0]);
         }
-        //Kahn's Algorithm of TopoSort
-        //If we are able to find there is a cycle then we can return false else true;
-        return toposort(adj,numCourses,indegree);
+        if(hasCycle(n, adj, prerequisites)) return false;
+        return true;
     }
-    public boolean toposort(ArrayList<ArrayList<Integer>> adj,int n,int[] indegree){
-        Queue<Integer> q = new LinkedList<>();
-        
-        for(int i = 0; i <n ;i++){
-            if(indegree[i] == 0) q.add(i);
+    public boolean hasCycle(int n, ArrayList<ArrayList<Integer>> adj, int[][] edges) {
+        int[] indegree = new int[n];
+        for(int[] e : edges) {
+            indegree[e[0]]++;
         }
-        int count = 0;
-        while(!q.isEmpty()){
-            int curr = q.poll();
-            count++;
-            for(int v: adj.get(curr)){
-                indegree[v]--;
-                if(indegree[v] == 0) q.add(v);
+        Queue<Integer> q = new LinkedList<>();
+        boolean[] visited = new boolean[n];
+        for(int i = 0; i < n; i++) {
+            if(indegree[i] == 0) {
+                q.add(i);
+                visited[i] = true;
             }
         }
-        return count == n;
+        while(!q.isEmpty()) {
+            int size = q.size();
+            while(size-- > 0) {
+                int curr = q.poll();
+                for(int v : adj.get(curr)) {
+                    if(visited[v]) continue;
+                    indegree[v]--;
+                    if(indegree[v] == 0) {
+                        q.add(v);
+                        visited[v] = true;
+                    }
+                }
+            }
+        }
+        for(int i = 0; i < n; i++) {
+            if(indegree[i] != 0) return true;
+        }
+        return false;
     }
 }
