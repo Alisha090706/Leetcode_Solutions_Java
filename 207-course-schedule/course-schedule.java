@@ -24,10 +24,12 @@ class Solution {
                 visited[i] = true;
             }
         }
+        int count = 0;
         while(!q.isEmpty()) {
             int size = q.size();
             while(size-- > 0) {
                 int curr = q.poll();
+                count++;
                 for(int v : adj.get(curr)) {
                     if(visited[v]) continue;
                     indegree[v]--;
@@ -38,9 +40,6 @@ class Solution {
                 }
             }
         }
-        for(int i = 0; i < n; i++) {
-            if(indegree[i] != 0) return true;
-        }
-        return false;
+        return !(count == n);
     }
 }
