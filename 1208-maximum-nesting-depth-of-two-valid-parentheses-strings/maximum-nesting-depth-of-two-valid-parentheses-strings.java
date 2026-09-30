@@ -6,11 +6,11 @@ class Solution {
         int[] ans = new int[length];
         for (int i = 0; i < length; i++) {
             if (seq.charAt(i) == '(') {
-                ++d;
                 ans[i] = d % 2;
+                d++;
             } else {
+                d--;
                 ans[i] = d % 2;
-                --d;
             }
         }
         return ans;
